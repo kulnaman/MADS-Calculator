@@ -6,7 +6,7 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 
 @Database(entities = [CalculatorEntity::class], version = 1, exportSchema = false)
-public abstract class CalculatorRommDatabase : RoomDatabase() {
+public abstract class CalculatorRoomDatabase : RoomDatabase() {
 
     abstract fun calculatorDao(): CalculatorDao
 
@@ -14,9 +14,9 @@ public abstract class CalculatorRommDatabase : RoomDatabase() {
         // Singleton prevents multiple instances of database opening at the
         // same time.
         @Volatile
-        private var INSTANCE: CalculatorRommDatabase? = null
+        private var INSTANCE: CalculatorRoomDatabase? = null
 
-        fun getDatabase(context: Context): CalculatorRommDatabase {
+        fun getDatabase(context: Context): CalculatorRoomDatabase {
             val tempInstance = INSTANCE
             if (tempInstance != null) {
                 return tempInstance
@@ -24,7 +24,7 @@ public abstract class CalculatorRommDatabase : RoomDatabase() {
             synchronized(this) {
                 val instance = Room.databaseBuilder(
                     context.applicationContext,
-                    CalculatorRommDatabase::class.java,
+                    CalculatorRoomDatabase::class.java,
                     "calculator_database"
                 ).build()
                 INSTANCE = instance

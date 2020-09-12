@@ -10,16 +10,48 @@ class MADSCalculatorTest {
     fun testEvaluate() {
     }
 
-    fun testGetImportance() {}
 
     @Test
     fun testCheckImportance() {
-//
-//        val madsCalculator = MADSCalculator()
-//        Assert.assertEquals(2.0f, madsCalculator.evaluate("50/20+5"))
-        val a = BigDecimal.valueOf(5.8)
-        val b = BigDecimal.valueOf(5.6)
-        val sub = a.subtract(b)
-        Assert.assertEquals(sub, BigDecimal.valueOf(0.2))
+
+        val madsCalculator = MADSCalculator()
+        Assert.assertEquals(BigDecimal(2.0), madsCalculator.evaluate("50/20+5"))
+
     }
+    @Test
+    fun testCheckImportance2() {
+
+        val madsCalculator = MADSCalculator()
+        Assert.assertEquals(BigDecimal(5.0), madsCalculator.evaluate("25-2*10"))
+
+    }
+    @Test
+    fun testCheckImportance3() {
+
+        val madsCalculator = MADSCalculator()
+        Assert.assertEquals(BigDecimal(-15.0), madsCalculator.evaluate("10/2-20"))
+
+    }
+    @Test
+    fun testCheckImportance4() {
+
+        val madsCalculator = MADSCalculator()
+        Assert.assertEquals(BigDecimal(5.0), madsCalculator.evaluate("10-2-3"))
+
+    }
+    @Test
+    fun testCheckImportance5() {
+
+        val madsCalculator = MADSCalculator()
+        Assert.assertEquals(BigDecimal(1.0), madsCalculator.evaluate("10/2/5"))
+
+    }
+    @Test
+    fun testCheckImportance6() {
+
+        val madsCalculator = MADSCalculator()
+        Assert.assertEquals(BigDecimal(1.0), madsCalculator.evaluate("10/2/4+1"))
+
+    }
+
 }
