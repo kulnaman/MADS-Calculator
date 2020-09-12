@@ -13,4 +13,7 @@ object CalculationDataRepository {
             searchQueryAndResultList.add(0, searchAndResultQuery)
         }
     }
+    fun deleteData(){
+        searchQueryAndResultList.clear()
+    }
 }
