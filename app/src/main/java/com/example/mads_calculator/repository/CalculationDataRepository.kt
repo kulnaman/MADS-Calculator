@@ -1,19 +1,15 @@
 package com.example.mads_calculator.repository
 
-import com.example.mads_calculator.model.SearchAndResultQuery
+import androidx.lifecycle.LiveData
+import com.example.mads_calculator.database.CalculatorDao
+import com.example.mads_calculator.database.CalculatorEntity
 
-object CalculationDataRepository {
-    var searchQueryAndResultList = mutableListOf<SearchAndResultQuery>()
-    @ExperimentalStdlibApi
-    fun addResultToResultList(searchAndResultQuery: SearchAndResultQuery) {
-        if (searchQueryAndResultList.size < 10) {
-            searchQueryAndResultList.add(0, searchAndResultQuery)
-        } else {
-            searchQueryAndResultList.removeLast()
-            searchQueryAndResultList.add(0, searchAndResultQuery)
-        }
+class CalculationDataRepository(private val calculatorDao: CalculatorDao) {
+    fun getlastTenWords(userId: String): LiveData<List<CalculatorEntity>> {
+        return calculatorDao.getLastTenRecords(userId)
     }
-    fun deleteData(){
-        searchQueryAndResultList.clear()
+
+    suspend fun insert(calculatorEntity: CalculatorEntity) {
+        calculatorDao.insert(calculatorEntity)
     }
 }

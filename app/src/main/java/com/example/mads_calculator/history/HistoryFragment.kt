@@ -8,6 +8,8 @@ import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import com.example.mads_calculator.R
 import com.example.mads_calculator.repository.CalculationDataRepository
 
@@ -17,6 +19,7 @@ import com.example.mads_calculator.repository.CalculationDataRepository
 class HistoryFragment : Fragment() {
 
     private var columnCount = 1
+    private lateinit var historyViewModel: HistoryViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,6 +34,7 @@ class HistoryFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_history_list, container, false)
+        historyViewModel = ViewModelProvider(this).get(HistoryViewModel::class.java)
 
         // Set the adapter
         if (view is RecyclerView) {
@@ -39,8 +43,10 @@ class HistoryFragment : Fragment() {
                     columnCount <= 1 -> LinearLayoutManager(context)
                     else -> GridLayoutManager(context, columnCount)
                 }
-                adapter =
-                    MyItemRecyclerViewAdapter(CalculationDataRepository.searchQueryAndResultList)
+                historyViewModel.lastTenExpressionsAndResults.observe(
+                    viewLifecycleOwner,
+                    Observer { adapter = MyItemRecyclerViewAdapter(it) })
+
             }
         }
         return view

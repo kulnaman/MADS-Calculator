@@ -104,7 +104,7 @@ class CalculatorFragment : Fragment() {
             if (TextUtils.isEmpty(binding.result.text)) showInvalidInputToast() else {
                 if (TextUtils.isDigitsOnly(binding.result.text.takeLast(1)))
                     binding.result.text =
-                        "${viewModel.evaluate(binding.result.text.toString())}"
+                        viewModel.evaluate(binding.result.text.toString()).toPlainString()
             }
         }
         binding.decimal.setOnClickListener {

@@ -37,7 +37,6 @@ class MainActivity : AppCompatActivity() {
         // as you specify a parent activity in AndroidManifest.xml.
         if (item.itemId == R.id.logout) {
             FirebaseAuth.getInstance().signOut()
-            CalculationDataRepository.deleteData()
             val i= Intent(this@MainActivity, LoginActivity::class.java)
             startActivity(i)
         }

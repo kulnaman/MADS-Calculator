@@ -6,8 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import com.example.mads_calculator.R
+import com.example.mads_calculator.database.CalculatorEntity
 
-import com.example.mads_calculator.model.SearchAndResultQuery
 import me.grantland.widget.AutofitHelper
 
 /**
@@ -15,7 +15,7 @@ import me.grantland.widget.AutofitHelper
  * TODO: Replace the implementation with code for your data type.
  */
 class MyItemRecyclerViewAdapter(
-    private val values: List<SearchAndResultQuery>
+    private val values: List<CalculatorEntity>
 ) : RecyclerView.Adapter<MyItemRecyclerViewAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -27,8 +27,8 @@ class MyItemRecyclerViewAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = values[position]
         AutofitHelper.create(holder.idView)
-        holder.idView.text = item.query
-        holder.contentView.text = item.result.toString()
+        holder.idView.text = item.expression
+        holder.contentView.text = item.result
     }
 
     override fun getItemCount(): Int = values.size
